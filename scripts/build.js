@@ -1,6 +1,7 @@
-import { writeFileSync } from "fs"
+import { writeFileSync, mkdirSync } from "fs"
 import esbuild from "esbuild"
 import { globby } from "globby"
+import { deleteAsync } from "del"
 
 // https://github.com/reesericci/esbuild-plugin-bookmarklet/blob/eba725c7470b5e7fc14d83fa9e218b5da4608a76/mod.js
 const convertBookmarkletPlugin = {
@@ -19,6 +20,7 @@ const convertBookmarkletPlugin = {
 }
 
 const build = async () => {
+  mkdirSync("./dist", { recursive: true })
   const entryPoints = await globby(["./src/*.ts"])
   await esbuild.build({
     entryPoints,
@@ -31,4 +33,5 @@ const build = async () => {
   })
 }
 
+await deleteAsync("./dist/**")
 await build()
