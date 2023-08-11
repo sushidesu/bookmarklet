@@ -13,8 +13,10 @@ const convertBookmarkletPlugin = {
           "Unable to access outputFiles. This is likely due to `write` being set to true."
         )
       }
-      const js = result.outputFiles.find((f) => f.path.match(/\.js$/))
-      writeFileSync(js.path, `javascript:${js.text}`)
+      for (const file of result.outputFiles) {
+        if (!file.path.match(/\.js$/)) continue
+        writeFileSync(file.path, `javascript:${file.text}`)
+      }
     })
   },
 }
