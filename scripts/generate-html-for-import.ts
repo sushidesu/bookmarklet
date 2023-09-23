@@ -7,7 +7,8 @@ const generateHtmlForImport = async () => {
   const files = await globby([`${DIST_DIR}/*.js`])
   const contents = {}
   for (const file of files) {
-    const name = file.split("/").pop().split(".")[0]
+    const name = file.split("/").pop()?.split(".")[0]
+    if (!name) continue
     const f = await readFile(file)
     contents[name] = f.toString().replace(/"/g, "'").slice(0, -1)
   }
@@ -27,4 +28,4 @@ const generateHtmlForImport = async () => {
 
 const dt = (name, content) => `<DT><A HREF="${content}">${name}</A></DT>`
 
-generateHtmlForImport()
+await generateHtmlForImport()

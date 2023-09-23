@@ -1,10 +1,10 @@
 import { writeFileSync, mkdirSync } from "fs"
-import esbuild from "esbuild"
+import esbuild, { Plugin } from "esbuild"
 import { globby } from "globby"
 import { deleteAsync } from "del"
 
 // https://github.com/reesericci/esbuild-plugin-bookmarklet/blob/eba725c7470b5e7fc14d83fa9e218b5da4608a76/mod.js
-const convertBookmarkletPlugin = {
+const convertBookmarkletPlugin: Plugin = {
   name: "bookmarklet",
   setup(build) {
     build.onEnd((result) => {

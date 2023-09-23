@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "node ./scripts/build.js",
-    "generate": "node ./scripts/generate-html-for-import.js"
+    "build": "node --loader @esbuild-kit/esm-loader ./scripts/build.ts",
+    "generate": "node --loader @esbuild-kit/esm-loader ./scripts/generate-html-for-import.ts"
   },
   "keywords": [],
   "author": "",
